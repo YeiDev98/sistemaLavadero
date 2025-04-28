@@ -1,0 +1,62 @@
+/* factura.css - Estilos para la Factura Imprimible */
+
+/* Variables (opcional, puedes usar colores directos o los de tu app) */
+:root {
+  --azul-factura: #1976d2; /* Un azul similar al de tu app */
+  --gris-texto: #333;
+  --gris-claro: #f8f8f8;
+  --borde-color: #eee;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff; /* Fondo blanco para impresión */
+  color: var(--gris-texto);
+  line-height: 1.6;
+}
+
+/* Contenedor principal de la factura */
+.invoice-box {
+  max-width: 750px; /* Ancho similar a A4, ajustable */
+  margin: 20px auto; /* Centrado con margen */
+  padding: 30px;
+  border: 1px solid var(--borde-color);
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra opcional, puede no imprimirse bien */
+  background-color: #fff;
+}
+
+/* Cabecera: Logo y Datos del Lavadero */
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Alinear arriba */
+  margin-bottom: 20px;
+}
+
+.invoice-header .logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color:
+
+/* responsive */
+
+@media (max-width: 600px) {
+  .details-section {
+    flex-direction: column; /* Pone Cliente y Servicio uno debajo del otro */
+    gap: 20px;
+  }
+  .invoice-header {
+     flex-direction: column; /* Pone Logo y Datos Lavadero uno debajo del otro */
+     align-items: center;
+     gap: 15px;
+     text-align: center;
+  }
+  .invoice-header .company-details {
+     text-align: center;
+  }
+}
+
+/* También hay reglas @media print para impresión */
+
