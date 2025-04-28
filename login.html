@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Lavadero</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Pequeños ajustes opcionales para el contenedor de login */
+        .login-container {
+            max-width: 400px; /* Más estrecho que el contenedor general */
+            margin: 50px auto; /* Más margen superior y centrado */
+            background: #fff; /* Asegurar fondo blanco si no lo tiene .contenedor */
+            padding: 20px; /* Padding interno */
+            border-radius: 15px; /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+            text-align: center; /* Centrar contenido */
+        }
+        .login-container h1 {
+             margin-bottom: 1.5rem;
+             color: var(--azul); /* Usar variable si está definida en styles.css */
+        }
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+            color: #555;
+        }
+         /* Inputs ya estilados por styles.css, pero podemos ajustar si es necesario */
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+             text-align: left; /* Alinear texto a la izquierda en login */
+             padding-left: 10px;
+             width: 100%; /* Asegurar ancho completo dentro del form-group */
+             box-sizing: border-box; /* Incluir padding/border en el ancho */
+        }
+         /* Mensaje de error */
+        .error-message {
+             color: #D8000C; /* Rojo para errores */
+             background-color: #FFD2D2; /* Fondo rojo claro */
+             border: 1px solid #D8000C;
+             border-radius: 5px;
+             padding: 8px;
+             margin-top: 1rem;
+             text-align: center;
+             font-size: 0.9em;
+        }
+         /* Botón ya estilado por styles.css */
+    </style>
+</head>
+<body>
+    <div class="contenedor login-container">
+        <h1>Iniciar Sesión</h1>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" name="username" placeholder="Ingresa tu usuario" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+            </div>
+
+            <button type="submit">Ingresar</button>
+
+            <p id="loginError" class="error-message" style="display: none;"></p>
+        </form>
+    </div>
+
+    <script src="js/db.js"></script>
+    <script src="js/login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

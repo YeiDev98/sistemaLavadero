@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reporte de Producción - Lavadero</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/reporte.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+        <div class="logo">Lavadero</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Inicio</a>
+            <a href="historial.html">Historial</a>
+            <a href="reporte.html">Reporte</a>
+            <a href="caja.html">Caja</a>
+            <a href="admin.html" id="adminUsersLink" style="display: none; background-color: #ffc107; color: black; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none;">Administrar</a>
+            <span id="userInfo" style="margin-left: 1rem; color: white; font-size: 0.9em; align-self: center;"></span>
+            <a href="#" onclick="event.preventDefault(); logout();" style="background-color: #dc3545; color: white; margin-left: auto;">Cerrar Sesión</a>
+        </div>
+    </nav>
+  </header>
+
+  <div class="contenedor-reporte" id="reportePrincipalContainer">
+    <h1>Dashboard de Reportes</h1>
+
+    <section class="kpi-section">
+      <div class="kpi-card card-hoy"><div class="card-title">Vehículos Hoy</div><div class="card-value" id="kpi-vehiculos-hoy">0</div></div>
+      <div class="kpi-card card-ingresos-hoy"><div class="card-title">Ingresos Hoy</div><div class="card-value" id="ingresos-dia">$0</div></div>
+      <div class="kpi-card card-total"><div class="card-title">Total Vehículos (Hist.)</div><div class="card-value" id="kpi-vehiculos-total">0</div></div>
+      <div class="kpi-card card-tipo-auto"><div class="card-title">Total Autos</div><div class="card-value" id="kpi-total-auto">0</div></div>
+      <div class="kpi-card card-tipo-moto"><div class="card-title">Total Motos</div><div class="card-value" id="kpi-total-moto">0</div></div>
+      <div class="kpi-card card-tipo-camion"><div class="card-title">Total Camiones</div><div class="card-value" id="kpi-total-camion">0</div></div>
+      <div class="kpi-card card-ingresos-mes"><div class="card-title">Ingresos Mes Actual</div><div class="card-value" id="ingresos-mes">$0</div></div>
+      <div class="kpi-card card-ingresos-anio"><div class="card-title">Ingresos Año Actual</div><div class="card-value" id="ingresos-anio">$0</div></div>
+    </section>
+
+    <section class="graficos-section admin-section">
+        <h2>Análisis Gráfico</h2>
+        <div class="chart-container">
+            <h3>Distribución por Tipo de Vehículo (Total)</h3>
+            <div style="position: relative; height:300px; max-width:400px; margin:auto;">
+                 <canvas id="tiposVehiculoChart"></canvas> </div>
+        </div>
+         </section>
+    <section class="lista-hoy-section admin-section">
+        <h2 id="tituloListaHoy">Vehículos Atendidos Hoy (...)</h2>
+        <div id="listaVehiculosHoy" class="item-list-container">
+            <p>Cargando lista...</p>
+        </div>
+    </section>
+
+  </div> <script src="js/db.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/reporte.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script> function toggleMenu() { const n=document.getElementById('navLinks'); if(n) n.classList.toggle('active'); } </script>
+
+</body>
+</html>

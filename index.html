@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lavadero de Vehículos</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header>
+  <nav class="navbar">
+    <div class="logo">LOGO</div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Inicio</a>
+      <a href="historial.html">Historial</a>
+      <a href="reporte.html">Reporte</a>
+      <a href="caja.html">Caja</a>
+      <a href="admin.html" id="adminUsersLink" style="display: none; background-color: #ffc107; color: black; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none;">Administrar Usuarios</a>
+      <span id="userInfo" style="margin-left: 1rem; color: white; font-size: 0.9em; align-self: center;"></span>
+      <a href="#" onclick="event.preventDefault(); logout();" style="background-color: #dc3545; color: white; margin-left: auto;">Cerrar Sesión</a>
+    </div>
+  </nav>
+  </header>
+  <div class="contenedor">
+    <h1>Lavadero</h1>
+
+    <select id="tipo">
+      <option value="Auto">Auto</option>
+      <option value="Moto">Moto</option>
+      <option value="Camion">Camión</option>
+    </select>
+
+    <select id="servicioVehiculo" required disabled><option value="">-- Primero selecciona tipo --</option></select>
+
+    <input type="text" id="marca" placeholder="Marca" />
+    <input type="text" id="placa" placeholder="Placa" />
+    <input type="text" id="propietario" placeholder="Propietario" />
+    <select id="personalAsignado">
+      <option value="" disabled selected>Seleccionar Personal...</option>
+      <option value="Juan Perez">Juan Perez</option>
+      <option value="Maria Garcia">Maria Garcia</option>
+      <option value="Carlos Rojas">Carlos Rojas</option>
+      <option value="Otro">Otro</option>
+    </select>
+    <button onclick="agregarVehiculo()">Agregar Vehículo</button>
+
+    <div id="listaVehiculos"></div>
+  </div>
+
+  <script src="js/db.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      if (nav) {
+         nav.classList.toggle('active');
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+</html>
+
+

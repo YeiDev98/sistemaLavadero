@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Caja - Lavadero</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Estilos básicos para esta página */
+        .caja-container { max-width: 500px; margin: 30px auto; text-align: center; }
+        #cajaStatus { margin: 20px 0; padding: 15px; border-radius: 8px; font-size: 1.1em; font-weight: bold; }
+        #cajaStatus.abierta { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        #cajaStatus.cerrada { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .caja-actions button { margin: 5px; /* Estilos del botón ya vienen de styles.css */ }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Lavadero</div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Inicio</a>
+                <a href="historial.html">Historial</a>
+                <a href="reporte.html">Reporte</a>
+                <a href="caja.html">Caja</a>
+                <a href="admin.html" id="adminUsersLink" style="display: none; background-color: #ffc107; color: black; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none;">Administrar Usuarios</a>
+                <span id="userInfo" style="margin-left: 1rem; color: white; font-size: 0.9em; align-self: center;"></span>
+                <a href="#" onclick="event.preventDefault(); logout();" style="background-color: #dc3545; color: white; margin-left: auto;">Cerrar Sesión</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="contenedor caja-container">
+        <h1>Gestión de Caja</h1>
+
+        <div id="cajaStatus">Cargando estado...</div>
+
+          <div class="caja-actions">
+            <button id="btnAbrirCaja" disabled>Abrir Caja</button>
+            <button id="btnCerrarCaja" disabled>Cerrar Caja</button>
+          </div>
+
+    </div>
+
+    <script src="js/db.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/caja.js"></script> <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script> function toggleMenu() { const n=document.getElementById('navLinks'); if(n) n.classList.toggle('active'); } </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Usuarios y Servicios - Lavadero</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .admin-container { max-width: 750px; margin: 30px auto; } /* Un poco más ancho */
+        .admin-section { margin-bottom: 2rem; padding: 1.5rem; background-color: #fff; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .admin-section h2 { margin-top: 0; color: var(--azul, #2196f3); border-bottom: 1px solid #eee; padding-bottom: 0.5rem; margin-bottom: 1rem;}
+        .form-group { margin-bottom: 1rem; text-align: left; }
+        .form-group label { display: block; margin-bottom: 0.3rem; font-weight: 600; color: #555; }
+        .form-group input, .form-group select { width: 100%; box-sizing: border-box; padding: 8px; border: 1px solid #ccc; border-radius: 5px;}
+        .message { margin-top: 1rem; padding: 10px; border-radius: 5px; text-align: center; font-size: 0.9em;}
+        .message.success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .message.error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        /* Estilos para las listas (usuarios y servicios) */
+        .item-list-container ul { list-style: none; padding: 0; }
+        .item-list-container li { display: flex; flex-wrap: wrap; /* Wrap en móvil */ justify-content: space-between; align-items: center; padding: 10px 5px; border-bottom: 1px solid #eee; gap: 10px; /* Espacio entre elementos */ }
+        .item-list-container li:last-child { border-bottom: none; }
+        .item-list-container .item-info { flex-grow: 1; margin-right: 10px; font-size: 0.95em; }
+         .item-list-container .item-info span { margin-right: 10px; /* Espacio entre datos */ }
+        .item-list-container .item-actions button { padding: 5px 8px; font-size: 0.85em; cursor: pointer; margin-left: 5px; border-radius: 4px; border: 1px solid transparent; }
+        .item-list-container .edit-btn { background-color: #ffc107; border-color: #ffc107; color: #333; }
+        .item-list-container .delete-btn { background-color: #dc3545; border-color: #dc3545; color: white; }
+        /* Hacer botones un poco más pequeños en móvil si es necesario */
+         @media (max-width: 480px) {
+             .item-list-container .item-actions button { padding: 3px 6px; font-size: 0.8em; }
+         }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Lavadero</div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Inicio</a>
+                <a href="historial.html">Historial</a>
+                <a href="reporte.html">Reporte</a>
+                <a href="caja.html">Caja</a>
+                <a href="admin.html" id="adminUsersLink" style="display: none; background-color: #ffc107; color: black; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none;">Administrar</a>
+                <span id="userInfo" style="margin-left: 1rem; color: white; font-size: 0.9em; align-self: center;"></span>
+                <a href="#" onclick="event.preventDefault(); logout();" style="background-color: #dc3545; color: white; margin-left: auto;">Cerrar Sesión</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="contenedor admin-container">
+        <h1>Administración</h1>
+
+        <section class="admin-section" id="users-section">
+            <h2>Gestionar Usuarios</h2>
+            <form id="addUserForm" style="margin-bottom: 1.5rem;">
+                 <h3>Agregar Nuevo Usuario</h3>
+                <div class="form-group"><label for="newUsername">Usuario:</label><input type="text" id="newUsername" required></div>
+                <div class="form-group"><label for="newPassword">Contraseña:</label><input type="password" id="newPassword" required></div>
+                <div class="form-group"><label for="newRole">Rol:</label><select id="newRole" required><option value="" disabled selected>Seleccionar...</option><option value="operario">Operario</option><option value="admin">Admin</option></select></div>
+                <button type="submit">Agregar Usuario</button>
+                 <p id="addUserMessage" class="message" style="display: none;"></p>
+            </form>
+            <h3>Lista de Usuarios</h3>
+            <div id="userListContainer" class="item-list-container">
+                <p>Cargando lista de usuarios...</p>
+            </div>
+        </section>
+
+        <section class="admin-section" id="services-section">
+            <h2>Gestionar Servicios</h2>
+             <form id="addServiceForm" style="margin-bottom: 1.5rem;">
+                 <h3>Agregar Nuevo Servicio</h3>
+                 <div class="form-group">
+                    <label for="serviceVehicleType">Tipo de Vehículo:</label>
+                    <select id="serviceVehicleType" required>
+                        <option value="" disabled selected>Seleccionar...</option>
+                        <option value="Auto">Auto</option>
+                        <option value="Moto">Moto</option>
+                        <option value="Camion">Camión</option>
+                    </select>
+                 </div>
+                 <div class="form-group">
+                     <label for="serviceName">Nombre del Servicio:</label>
+                     <input type="text" id="serviceName" placeholder="Ej: Lavado Básico, Full Detailing" required>
+                 </div>
+                  <div class="form-group">
+                     <label for="servicePrice">Precio ($):</label>
+                     <input type="number" id="servicePrice" min="0" step="1" placeholder="Ej: 35000" required>
+                 </div>
+                 <button type="submit">Agregar Servicio</button>
+                  <p id="addServiceMessage" class="message" style="display: none;"></p>
+            </form>
+             <h3>Lista de Servicios</h3>
+            <div id="serviceListContainer" class="item-list-container">
+                <p>Cargando lista de servicios...</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="js/db.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script> function toggleMenu() { const n=document.getElementById('navLinks'); if(n) n.classList.toggle('active'); } </script>
+</body>
+</html>
